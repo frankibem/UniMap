@@ -1,8 +1,8 @@
 ﻿/// <reference path="../lib/angular/angular.js" />
 
 angular.module('appModule')
-    .controller('indexCtrl', ['$scope', '$mdSidenav', 'mapService',
-        function ($scope, $mdSidenav, mapService) {
+    .controller('indexCtrl', ['$scope', '$mdSidenav',
+        function ($scope, $mdSidenav) {
             $scope.initMap = () => {
                 $scope.$apply(() => {
                     var myLocation = new google.maps.LatLng(33.607601, -101.936684);
@@ -13,6 +13,13 @@ angular.module('appModule')
                 });
             }
 
-            mapService.init();
+            $scope.openLeftMenu = () => {
+                $mdSidenav('left').toggle();
+            }
+
+            var script = document.createElement('script');
+            script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBPmQNyqp608U0rAZIk2vsbONq9suPmOxE&callback=initialize&libraries=drawing";
+            script.type = "text/javascript";
+            document.getElementsByTagName("body")[0].appendChild(script);
         }
     ]);
