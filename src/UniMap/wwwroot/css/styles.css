@@ -38,3 +38,22 @@
 .loginCard {
     padding: 10px;
 }
+
+#dialog {
+    box-shadow: none;
+    width: 200px;
+}
+
+@media(min-with: 400px) {
+    #dialog {
+        width: 300px;
+    }
+}
+
+#dialog md-card-title {
+    flex: none;
+}
+
+#dialog md-card-content {
+    flex: 1;
+}
