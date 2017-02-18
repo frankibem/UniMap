@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UniMap.Models;
 
-namespace UniMap.Data_Access
+namespace UniMap.DataAccess
 {
     public interface IEventRepository
     {
@@ -16,7 +16,7 @@ namespace UniMap.Data_Access
 
         Event GetEvent(int eventID);
 
-        IEnumerable<Event> GetEvents(IEnumerable<int> eventIDs);
+        IEnumerable<Event> GetEvents(IEnumerable<int> eventIDs = null);
 
         IEnumerable<Event> GetEventsByTags(IEnumerable<Tag> tags);
 

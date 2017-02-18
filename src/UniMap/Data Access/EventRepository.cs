@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UniMap.Data;
 using UniMap.Models;
 
-namespace UniMap.Data_Access
+namespace UniMap.DataAccess
 {
     public class EventRepository : IEventRepository
     {
@@ -77,15 +78,7 @@ namespace UniMap.Data_Access
 
             if (dbEvent == null) return false;
 
-            // Map the updated information over.
-            dbEvent.Address = @event.Address;
-            dbEvent.EndOn = @event.EndOn;
-            dbEvent.Latitude = @event.Latitude;
-            dbEvent.Longitude = @event.Longitude;
-            dbEvent.StartOn = @event.StartOn;
-            dbEvent.Tags = @event.Tags;
-            dbEvent.Title = @event.Title;
-
+            _db.Entry(@event).State = EntityState.Modified;
             _db.SaveChanges();
             return true;
         }
@@ -101,11 +94,18 @@ namespace UniMap.Data_Access
         /// <summary>
         /// Given several event IDs, return the corresponding events (or empty).
         /// </summary>
-        public IEnumerable<Event> GetEvents(IEnumerable<int> eventIDs)
+        public IEnumerable<Event> GetEvents(IEnumerable<int> eventIDs = null)
         {
-            var eventIDsHash = new HashSet<int>(eventIDs);
+            if (eventIDs?.Any() ?? false)
+            {
+                var eventIDsHash = new HashSet<int>(eventIDs);
 
-            return _db.Events.Where(e => eventIDsHash.Contains(e.ID));
+                return _db.Events.Where(e => eventIDsHash.Contains(e.ID));
+            }
+            else
+            {
+                return _db.Events;
+            }
         }
 
         /// <summary>
