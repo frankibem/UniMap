@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="~/lib/angular-material/angular-material.css" rel="stylesheet" />
     <link href="~/css/map.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/styles.css" rel="stylesheet" />
 </head>
 
@@ -21,45 +22,59 @@
                 md-component-id="left"
                 md-whiteframe="4"
                 md-is-open="true">
-      <br /><br />
-      <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
-      <br /><br />
-      <md-subheader class="md-no-sticky">3 line item (with hover)</md-subheader>
-        <md-list-item class="md-3-line nav-event" ng-click="null">
-          <i class="material-icons nav-map-icon">place</i>
-          <div class="md-list-item-text" layout="column">
-            <h3><strong>Event Title</strong></h3>
-            <h4>02/17/17</h4>
-            <p>This event is really cool, you should come!This event is really cool, you should come!This event is really cool, you should come!</p>
-          </div>
-        </md-list-item>
-        <md-list-item class="md-3-line nav-event" ng-click="null">
-          <i class="material-icons nav-map-icon">place</i>
-          <div class="md-list-item-text" layout="column">
-            <h3><strong>Event Title</strong></h3>
-            <h4>02/17/17</h4>
-            <p>This event is really cool, you should come!</p>
-          </div>
-        </md-list-item>
-        <md-list-item class="md-3-line nav-event" ng-click="null">
-          <i class="material-icons nav-map-icon">place</i>
-          <div class="md-list-item-text" layout="column">
-            <h3><strong>Event Title</strong></h3>
-            <h4>02/17/17</h4>
-            <p>This event is really cool, you should come!</p>
-          </div>
-        </md-list-item>
+        <br /><br />
+        <md-datepicker ng-model="curDate" md-placeholder="Enter date" md-min-date="today"></md-datepicker>
+        <br /><br />
 
+        <div layout="row">
+            <md-input-container>
+                <label>Tags</label>
+                <md-select ng-model="selectedTags" multiple>
+                    <md-optgroup label="tags">
+                        <md-option ng-value="tag" ng-repeat="tag in tags">{{tag}}</md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <md-list flex>
+            <md-subheader class="md-no-sticky">Events for {{curDate.toDateString()}}</md-subheader>
+            <div ng-repeat="event in events | byTag: selectedTags">
+                <md-list-item class="md-3-line nav-event" ng-click="centerOnMap(event)">
+                    <i class="material-icons nav-map-icon">place</i>
+                    <div class="md-list-item-text" layout="column">
+                        <h3><strong>{{event.title}}</strong></h3>
+                        <h4>Starts at {{event.startOn.toLocaleTimeString()}}</h4>
+                        <h4>Ends at {{event.endOn.toLocaleTimeString()}}</h4>
+                    </div>
+                </md-list-item>
+                <md-divider ng-if="!$last"></md-divider>
+            </div>
+        </md-list>
     </md-sidenav>
 
     <div id="map"></div>
 
     <div class="map-menu-button">
-      <md-button class="md-fab" aria-label="Eat cake" ng-click="openLeftMenu()">
-          <i class="material-icons home-map-icon">place</i>
-      </md-button>
+        <md-button class="md-fab" aria-label="Menu" ng-click="toggleSidenav()">
+            <md-icon>place</md-icon>
+        </md-button>
     </div>
 
+    <md-card id="dialog" class="dialog">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">{{selectedEvent.title}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            Some wonderful text here
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="closeInfoWindow()">Close</md-button>
+            <md-button href="{{mapUrl(selectedEvent) || '#'}}" target="_blank">Map</md-button>
+        </md-card-actions>
+    </md-card>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/angular/angular.min.js"></script>
@@ -69,6 +84,9 @@
     <script src="~/lib/angular-material/angular-material.min.js"></script>
 
     <script src="~/js/app.js"></script>
+    <script src="~/js/home/tagfilter.js"></script>
+    <script src="~/js/map.service.js"></script>
+    <script src="~/js/event.service.js"></script>
     <script src="~/js/home/index.controller.js"></script>
     <script src="~/js/map.js"></script>
 </body>
