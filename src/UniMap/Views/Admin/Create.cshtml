@@ -7,74 +7,82 @@
 @section styles {
     <link href="~/css/map.css" rel="stylesheet" />
 }
+<div ng-controller="createCtrl">
+    <form flex="100" flex-gt-xs="60" flex-offset-gt-xs="20" flex-gt-sm="50" flex-offset-gt-sm="25">
+        <h2>Create Event</h2>
 
-<form asp-action="Create" flex="100" flex-gt-xs="60" flex-offset-gt-xs="20" flex-gt-sm="50" flex-offset-gt-sm="25">
-    <h2>Create Event</h2>
+        <md-input-container class="create_input">
+            <label>Title</label>
+            <input type="text">
+        </md-input-container>
+        <br />
+        <md-input-container class="create_input">
+            <label>Description</label>
+            <input type="text">
+        </md-input-container>
+        <br />
+        <md-input-container>
+            <label>Start Date</label>
+            <md-datepicker ng-model="newEvent.start" md-placeholder="Start date"></md-datepicker>
+        </md-input-container>
+        <md-input-container>
+            <label>Start Time</label>
+            <md-select ng-model="newEvent.hours">
+                    <md-option ng-repeat="hour in hours" value="{{hour}}">
+                        {{hour}}
+                    </md-option>
+                </md-select> :
+                <md-select ng-model="newEvent.minutes">
+                    <md-option ng-repeat="minute in minutes" value="{{minute}}">
+                        {{minute}}
+                    </md-option>
+                </md-select>
+        </md-input-container>
+        <br />
+        <md-input-container>
+            <label>End Date</label>
+            <md-datepicker md-placeholder="End date"></md-datepicker>
+        </md-input-container>
+        <md-input-container>
+            <label>End Time</label>
+            <input type="text">
+            <md-select ng-model="user.hours">
+                    <md-option ng-repeat="hour in hours" value="{{hour}}">
+                        {{hour}}
+                    </md-option>
+                </md-select> :
+                <md-select ng-model="user.minutes">
+                    <md-option ng-repeat="minute in minutes" value="{{minute}}">
+                        {{minute}}
+                    </md-option>
+                </md-select>
+        </md-input-container>
+        <br />
+        <md-input-container class="create_input>
+            <label>Address</label>
+            <input type="text">
+        </md-input-container>
+        <hr />
+        <div id="small_map"></div>
+        <br />
 
-    <md-input-container>
-        <label>Email</label>
-        <input asp-for="Title" type="text" class="create_input">
-        <span asp-validation-for="Title" class="text-danger" />
-    </md-input-container>
-    <br />
-    <md-input-container>
-        <label>Description</label>
-        <input asp-for="Title" type="text">
-        <span asp-validation-for="Title" class="text-danger" />
-    </md-input-container>
-    <br />
-    <md-input-container>
-        <label>Start Date</label>
-        @*<md-datepicker md-placeholder="Start date"></md-datepicker>*@
-    </md-input-container>
-    <md-input-container>
-        <label>Start Time</label>
-        @*<md-select ng-model="user.hours">
-                <md-option ng-repeat="hour in hours" value="{{hour}}">
-                    {{hour}}
-                </md-option>
-            </md-select> :
-            <md-select ng-model="user.minutes">
-                <md-option ng-repeat="minute in minutes" value="{{minute}}">
-                    {{minute}}
-                </md-option>
-            </md-select>*@
-    </md-input-container>
-    <br />
-    <md-input-container>
-        <label>End Date</label>
-        @*<md-datepicker md-placeholder="End date"></md-datepicker>*@
-    </md-input-container>
-    <md-input-container>
-        <label>End Time</label>
-        <input asp-for="Title" type="text">
-        @*<md-select ng-model="user.hours">
-                <md-option ng-repeat="hour in hours" value="{{hour}}">
-                    {{hour}}
-                </md-option>
-            </md-select> :
-            <md-select ng-model="user.minutes">
-                <md-option ng-repeat="minute in minutes" value="{{minute}}">
-                    {{minute}}
-                </md-option>
-            </md-select>*@
-    </md-input-container>
-    <br />
-    <md-input-container>
-        <label>Address</label>
-        <input asp-for="Title" type="text">
-        <span asp-validation-for="Title" class="text-danger" />
-    </md-input-container>
-    <hr />
-    <div id="map"></div>
-    <br />
+        <md-button href="/Admin">Cancel</md-button>
+        <md-button type="submit" value="Save" class="md-raised md-primary">Submit</md-button>
 
-    <md-button href="/Admin">Cancel</md-button>
-    <md-button type="submit" value="Save" class="md-raised md-primary">Submit</md-button>
+    </form>
+</div>
 
-</form>
 
 @section Scripts {
-    <script src="~/js/map.js"></script>
+    <script src="~/js/event.service.js"></script>
+    <script src="~/js/map.service.js"></script>
+    <script src="~/js/admin/create.controller.js"></script>
+    <script type="text/javascript">
+        function initialize() {
+            angular.element($('#small_map')).scope().initMap();
+        }
+    </script>
+
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
