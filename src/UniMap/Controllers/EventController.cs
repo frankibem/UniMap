@@ -59,11 +59,9 @@ namespace UniMap.Controllers
             if (id != @event.ID)
                 return BadRequest();
 
-            _eventManager.EditEvent(@event);
-
             try
             {
-                _eventManager.EditEvent(@event);
+                _eventManager.EditEvent(id, @event);
             }
             catch (DbUpdateConcurrencyException)
             {

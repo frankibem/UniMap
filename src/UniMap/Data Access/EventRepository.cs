@@ -72,13 +72,21 @@ namespace UniMap.DataAccess
         /// <summary>
         /// Find the given event in the store and update the data.
         /// </summary>
-        public bool EditEvent(Event @event)
+        public bool EditEvent(int id, Event @event)
         {
-            var dbEvent = GetEvent(@event.ID);
+            var dbEvent = GetEvent(id);
 
             if (dbEvent == null) return false;
 
-            _db.Entry(@event).State = EntityState.Modified;
+            dbEvent.Address = @event.Address;
+            dbEvent.Description = @event.Description;
+            dbEvent.EndOn = @event.EndOn;
+            dbEvent.Latitude = @event.Latitude;
+            dbEvent.Longitude = @event.Longitude;
+            dbEvent.StartOn = @event.StartOn;
+            dbEvent.Tags = @event.Tags;
+            dbEvent.Title = @event.Title;
+
             _db.SaveChanges();
             return true;
         }
@@ -88,24 +96,24 @@ namespace UniMap.DataAccess
         /// </summary>
         public Event GetEvent(int eventID)
         {
-            return _db.Events.FirstOrDefault(e => e.ID == eventID);
+            var @event = _db.Events.FirstOrDefault(e => e.ID == eventID);
+            @event.Tags = GetTagsByEventID(eventID).ToList();
+
+            return @event;
         }
 
         /// <summary>
         /// Given several event IDs, return the corresponding events (or empty).
         /// </summary>
-        public IEnumerable<Event> GetEvents(IEnumerable<int> eventIDs = null)
+        public IEnumerable<Event> GetEvents()
         {
-            if (eventIDs?.Any() ?? false)
+            var events = _db.Events;
+            foreach(var @event in events)
             {
-                var eventIDsHash = new HashSet<int>(eventIDs);
+                @event.Tags = GetTagsByEventID(@event.ID).ToList();
+            }
 
-                return _db.Events.Where(e => eventIDsHash.Contains(e.ID));
-            }
-            else
-            {
-                return _db.Events;
-            }
+            return events;
         }
 
         /// <summary>
@@ -115,9 +123,9 @@ namespace UniMap.DataAccess
         {
             var tagsHash = new HashSet<int>(tags.Select(t => t.ID));
 
-            return from e in _db.Events
-                   where e.Tags.Any(t => tagsHash.Contains(t.ID))
-                   select e;
+            return (from e in _db.Events
+                    where e.Tags.Any(t => tagsHash.Contains(t.ID))
+                    select e).Include(e => e.Tags);
         }
 
         /// <summary>
@@ -126,6 +134,15 @@ namespace UniMap.DataAccess
         public Tag GetTag(int tagID)
         {
             return _db.Tags.FirstOrDefault(t => t.ID == tagID);
+        }
+
+        /// <summary>
+        /// Get all the tags for a given event ID
+        /// </summary>
+        private IEnumerable<Tag> GetTagsByEventID(int eventID)
+        {
+            return _db.EventTags.Where(et => et.EventID == eventID)
+                                .Select(et => et.Tag);
         }
     }
 }

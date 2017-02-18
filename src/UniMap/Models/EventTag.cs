@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,10 @@ namespace UniMap.Models
         public int EventID { get; set; }
         public int TagID { get; set; }
 
-        public virtual Event Event { get; set; }
-        public virtual Tag Tag { get; set; }
+        [Required]
+        public Event Event { get; set; }
+
+        [Required]
+        public Tag Tag { get; set; }
     }
 }

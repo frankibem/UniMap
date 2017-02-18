@@ -42,11 +42,11 @@ namespace UniMap.Data
 
             var eventTags = new EventTag[]
             {
-                new EventTag { EventID = events[0].ID, TagID = tags[1].ID },
-                new EventTag { EventID = events[0].ID, TagID = tags[2].ID },
-                new EventTag { EventID = events[1].ID, TagID = tags[2].ID },
-                new EventTag { EventID = events[1].ID, TagID = tags[3].ID },
-                new EventTag { EventID = events[0].ID, TagID = tags[1].ID }
+                new EventTag { Event = events[0], Tag = tags[1] },
+                new EventTag { Event = events[0], Tag = tags[2] },
+                new EventTag { Event = events[1], Tag = tags[2] },
+                new EventTag { Event = events[1], Tag = tags[3] },
+                new EventTag { Event = events[0], Tag = tags[1] }
             };
             context.EventTags.AddRange(eventTags);
             context.SaveChanges();

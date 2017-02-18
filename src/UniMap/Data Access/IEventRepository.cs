@@ -10,13 +10,13 @@ namespace UniMap.DataAccess
     {
         int CreateEvent(Event @event);
 
-        bool EditEvent(Event @event);
+        bool EditEvent(int id, Event @event);
 
         bool DeleteEvent(int eventID);
 
         Event GetEvent(int eventID);
 
-        IEnumerable<Event> GetEvents(IEnumerable<int> eventIDs = null);
+        IEnumerable<Event> GetEvents();
 
         IEnumerable<Event> GetEventsByTags(IEnumerable<Tag> tags);
 
