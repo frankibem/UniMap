@@ -24,5 +24,16 @@ angular.module('appModule')
             }
 
             mapService.init();
+
+            $scope.hours = new Array(24)
+            for (var i = 0; i < 24; i++) {
+                $scope.hours[i] = i;
+            }
+
+            $scope.minutes = new Array(60)
+            for (var i = 0; i < 60; i++) {
+                $scope.minutes[i] = i;
+            }
+
         }
     ]);
