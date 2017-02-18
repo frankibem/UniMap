@@ -20,26 +20,34 @@
 <body ng-controller="indexCtrl">
     <md-sidenav class="md-sidenav-left sidenav-padding"
                 md-component-id="left"
-                md-whiteframe="4"
                 md-is-open="true">
-        <br /><br />
-        <md-datepicker ng-model="curDate" md-placeholder="Enter date" md-min-date="today"></md-datepicker>
-        <br /><br />
-
-        <div layout="row">
-            <md-input-container>
-                <label>Tags</label>
-                <md-select ng-model="selectedTags" multiple>
-                    <md-optgroup label="tags">
-                        <md-option ng-value="tag" ng-repeat="tag in tags">{{tag}}</md-option>
-                    </md-optgroup>
-                </md-select>
-            </md-input-container>
+        <br />
+        <div layout>
+            <div flex="10"></div>
+            <div flex="60">
+                <md-datepicker ng-model="curDate" md-placeholder="Enter date" md-min-date="today"></md-datepicker>
+            </div>
+            <div flex></div>
         </div>
+        <div layout>
+            <div flex="15"></div>
+            <div flex="60">
+                <md-input-container style="width:100%;">
+                    <label>Tags</label>
+                    <md-select ng-model="selectedTags" multiple>
+                        <md-optgroup label="tags">
+                            <md-option ng-value="tag" ng-repeat="tag in tags">{{tag}}</md-option>
+                        </md-optgroup>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div flex></div>
+        </div>
+        <br />
 
         <md-list flex>
-            <md-subheader class="md-no-sticky">Events for {{curDate.toDateString()}}</md-subheader>
-            <div ng-repeat="event in events | byTag: selectedTags">
+            <md-subheader ng-show="{{curDate}}" class="md-no-sticky">Events for {{curDate.toDateString()}}</md-subheader>
+            <div ng-repeat="event in events | byTag: selectedTags | byDate: curDate">
                 <md-list-item class="md-3-line nav-event" ng-click="centerOnMap(event)">
                     <i class="material-icons nav-map-icon">place</i>
                     <div class="md-list-item-text" layout="column">
@@ -69,11 +77,11 @@
         </md-card-title>
         <md-card-content>
             <h2>Description</h2>
-            <p>Some wonderful text here</p>
+            <p>{{selectedEvent.description}}</p>
             <h3>Starts</h3>
-            <p>Feb, 20 1992 12:00pm</p>
+            <p>{{selectedEvent.startOn.toDateString() + ", " + selectedEvent.startOn.toLocaleTimeString()}}</p>
             <h3>Ends</h3>
-            <p>Feb, 20 1992 12:00pm</p>
+            <p>{{selectedEvent.endOn.toDateString() + ", " + selectedEvent.endOn.toLocaleTimeString()}}</p>
         </md-card-content>
 
         <md-card-actions layout="row" layout-align="end center">
@@ -91,6 +99,7 @@
 
     <script src="~/js/app.js"></script>
     <script src="~/js/home/tagfilter.js"></script>
+    <script src="~/js/home/datefilter.js"></script>
     <script src="~/js/map.service.js"></script>
     <script src="~/js/event.service.js"></script>
     <script src="~/js/home/index.controller.js"></script>

@@ -4,6 +4,7 @@
 /// <reference path="js/admin/index.controller.js" />
 /// <reference path="js/app.js" />
 /// <reference path="js/event.service.js" />
+/// <reference path="js/home/datefilter.js" />
 /// <reference path="js/home/index.controller.js" />
 /// <reference path="js/home/tagfilter.js" />
 /// <reference path="js/map.js" />
