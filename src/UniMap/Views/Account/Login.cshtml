@@ -8,12 +8,13 @@
     ViewData["Title"] = "Log in";
 }
 
-<br /><br />
-<h2 class="login_header">@ViewData["Title"].</h2>
+<br /><br /><br /><br />
 
 <div layout="row" ng-cloak>
-  <div flex="100" flex-gt-xs="60" flex-offset-gt-xs="20" flex-gt-sm="50" flex-offset-gt-sm="25">
+  <md-card flex="100" flex-gt-xs="60" flex-offset-gt-xs="20" flex-gt-sm="50" flex-offset-gt-sm="25" class="loginCard">
     <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+
+
         <h4>Use a local account to log in.</h4>
         <br />
 
@@ -26,7 +27,7 @@
 
         <md-input-container class="md-block">
           <!-- Use floating placeholder instead of label -->
-          <input asp-for="Password" ng-model="user.password" type="password" placeholder="Passoword" ng-required="true"/>
+          <input asp-for="Password" ng-model="user.password" type="password" placeholder="Password" ng-required="true"/>
           <span asp-validation-for="Password" class="text-danger"></span>
         </md-input-container>
 
@@ -37,21 +38,14 @@
         </md-input-container>
 
         <div>
-          <md-button type="submit">Log in</md-button>
+          <md-button type="submit" class="md-raised md-primary">Log in</md-button>
         </div>
 
-        <div>
-          <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
-        </div>
-        <div>
-          <a asp-action="ForgotPassword">Forgot your password?</a>
-        </div>
     </form>
-  </div>
+  </md-card>
 </div>
 
 
 @section Scripts {
-    <script src="~/js/login/index.controller.js"></script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
