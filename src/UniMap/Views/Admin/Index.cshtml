@@ -1,0 +1,54 @@
+@model IEnumerable<UniMap.Models.Event>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Title)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+            </tr>
+        }
+            
+    </tbody>
+</table>
+<md-button class="md-fab md-primary md-fab-bottom-right absolute-fab" aria-label="Create Event" href="/Admin/Create">
+    <md-icon>add</md-icon>
+</md-button>
