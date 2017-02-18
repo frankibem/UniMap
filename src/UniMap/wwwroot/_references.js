@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
-/// <reference path="js/site.js" />
+/// <reference path="js/map.service.js" />
+/// <reference path="js/site.min.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-animate/angular-animate.js" />
 /// <reference path="lib/angular-aria/angular-aria.js" />
