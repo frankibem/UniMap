@@ -1,4 +1,5 @@
 require 'compass/import-once/activate'
+require 'autoprefixer-rails'
 
 # Require any additional compass plugins here.
 
@@ -24,3 +25,19 @@ output_style = :compressed
 # preferred_syntax = :sass
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
+
+on_stylesheet_saved do |file|
+  css = File.read(file)
+  map = file + '.map'
+
+  if File.exists? map
+    result = AutoprefixerRails.process(css,
+      from: file,
+      to:   file,
+      map:  { prev: File.read(map), inline: false })
+    File.open(file, 'w') { |io| io << result.css }
+    File.open(map,  'w') { |io| io << result.map }
+  else
+    File.open(file, 'w') { |io| io << AutoprefixerRails.process(css) }
+  end
+end
