@@ -1,0 +1,49 @@
+
+/* Home Page CSS */
+.map-menu-button {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+}
+
+.home-map-icon {
+  font-size: 35px;
+  line-height: inherit;
+}
+
+.nav-map-icon {
+  padding: 15px 15px 15px 0;
+  font-size: 35px;
+  line-height: inherit;
+
+  p {
+    overflow: hidden;
+  }
+}
+
+.md-list-item-inner {
+  max-height: 100px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.md-list-item-text {
+  padding: 15px 0;
+
+}
+
+.sidenav-padding {
+  padding: 10px;
+}
+
+
+/* End Home Page CSS */
+
+/* Login Page CSS */
+
+.loginCard {
+  padding: 10px;
+}
+
+/* End Login Page CSS */
