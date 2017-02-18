@@ -13,15 +13,53 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="~/lib/angular-material/angular-material.css" rel="stylesheet" />
     <link href="~/css/map.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
 </head>
 
 <body ng-controller="indexCtrl">
-    <md-sidenav class="md-sidenav-left"
+    <md-sidenav class="md-sidenav-left sidenav-padding"
                 md-component-id="left"
-                md-whiteframe="4">
+                md-whiteframe="4"
+                md-is-open="true">
+      <br /><br />
+      <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+      <br /><br />
+      <md-subheader class="md-no-sticky">3 line item (with hover)</md-subheader>
+        <md-list-item class="md-3-line nav-event" ng-click="null">
+          <i class="material-icons nav-map-icon">place</i>
+          <div class="md-list-item-text" layout="column">
+            <h3><strong>Event Title</strong></h3>
+            <h4>02/17/17</h4>
+            <p>This event is really cool, you should come!This event is really cool, you should come!This event is really cool, you should come!</p>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-3-line nav-event" ng-click="null">
+          <i class="material-icons nav-map-icon">place</i>
+          <div class="md-list-item-text" layout="column">
+            <h3><strong>Event Title</strong></h3>
+            <h4>02/17/17</h4>
+            <p>This event is really cool, you should come!</p>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-3-line nav-event" ng-click="null">
+          <i class="material-icons nav-map-icon">place</i>
+          <div class="md-list-item-text" layout="column">
+            <h3><strong>Event Title</strong></h3>
+            <h4>02/17/17</h4>
+            <p>This event is really cool, you should come!</p>
+          </div>
+        </md-list-item>
+
     </md-sidenav>
 
     <div id="map"></div>
+
+    <div class="map-menu-button">
+      <md-button class="md-fab" aria-label="Eat cake" ng-click="openLeftMenu()">
+          <i class="material-icons home-map-icon">place</i>
+      </md-button>
+    </div>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/angular/angular.min.js"></script>
