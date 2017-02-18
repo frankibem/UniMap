@@ -22,5 +22,8 @@ namespace UniMap.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }
