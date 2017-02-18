@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body ng-app="UniMap" ng-cloak>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -61,6 +61,18 @@
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+
+        @* Angular JS *@
+        <script src="~/lib/angular/angular.min.js"></script>
+        <script src="~/lib/angular-material/angular-material.min.js"></script>
+        <script src="~/lib/angular-messages/angular-messages.min.js"></script>
+
+        <script>
+          angular.module('UniMap', ['ngMaterial'])
+            .controller('AppCtrl', function($scope) {});
+        </script>
+        @* End Angular JS *@
+
     </environment>
 
     @RenderSection("scripts", required: false)
