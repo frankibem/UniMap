@@ -13,15 +13,25 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="~/lib/angular-material/angular-material.css" rel="stylesheet" />
     <link href="~/css/map.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
 </head>
 
 <body ng-controller="indexCtrl">
     <md-sidenav class="md-sidenav-left"
                 md-component-id="left"
-                md-whiteframe="4">
+                md-whiteframe="4"
+                md-is-open="false">
+
     </md-sidenav>
 
     <div id="map"></div>
+
+    <div class="map-menu-button">
+      <md-button class="md-fab" aria-label="Eat cake">
+          <md-icon md-svg-src="img/icons/cake.svg"></md-icon>
+      </md-button>
+    </div>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/angular/angular.min.js"></script>
