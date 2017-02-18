@@ -1,4 +1,4 @@
-﻿angular.module('appModule', [])
+﻿angular.module('appModule')
     .factory('eventService', function ($http) {
         return {
             getEvents: () => {
