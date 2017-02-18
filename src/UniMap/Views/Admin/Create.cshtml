@@ -1,0 +1,109 @@
+@model UniMap.Models.Event
+
+@{
+    ViewData["Title"] = "Create a new Event";
+}
+
+@section styles {
+    <link href="~/css/map.css" rel="stylesheet" />
+}
+<div ng-controller="createCtrl">
+    <form flex="100" flex-gt-xs="60" flex-offset-gt-xs="20" flex-gt-sm="50" flex-offset-gt-sm="25" name="eventForm">
+        <h2>Create a new Event</h2>
+
+        <md-input-container class="create_input">
+            <label>Title</label>
+            <input type="text" ng-model="newEvent.title" required>
+        </md-input-container>
+        <br />
+        <md-input-container class="create_input">
+            <label>Description</label>
+            <textarea type="text" ng-model="newEvent.description" required rows="10"></textarea>
+        </md-input-container>
+        <br />
+        <div layout>
+            <div flex="50">
+                <md-input-container class="create_input">
+                    <label>Start Date</label>
+                    <md-datepicker ng-model="newEvent.startOn" required></md-datepicker>
+                </md-input-container>
+            </div>
+            <div flex="50">
+                <md-input-container>
+                    <label>End Date</label>
+                    <md-datepicker ng-model="newEvent.endOn" required></md-datepicker>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout>
+            <div layout flex="50">
+                <md-input-container flex="50">
+                    <label>HH</label>
+                    <md-select ng-model="newEvent.startHour" required>
+                        <md-option ng-repeat="hour in hours" value="{{hour}}">
+                            {{hour}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>MM</label>
+                    <md-select ng-model="newEvent.startMinute" required>
+                        <md-option ng-repeat="minute in minutes" value="{{minute}}">
+                            {{minute}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div layout flex="50">
+                <md-input-container flex="50">
+                    <label>HH</label>
+                    <md-select ng-model="newEvent.endHour" required>
+                        <md-option ng-repeat="hour in hours" value="{{hour}}">
+                            {{hour}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>MM</label>
+                    <md-select ng-model="newEvent.endMinute" required>
+                        <md-option ng-repeat="minute in minutes" value="{{minute}}">
+                            {{minute}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </div>
+        <br />
+        <div layout>
+            <md-input-container class="create_input">
+                <label>Address</label>
+                <textarea ng-model="newEvent.address" required rows="2"></textarea>
+            </md-input-container>
+            <md-button class="md-fab md-primary" aria-label="Search" ng-click="transcode(newEvent.address)">
+                <md-icon>search</md-icon>
+            </md-button>
+        </div>
+        <hr />
+        <div id="small_map"></div>
+        <br />
+
+        <md-button href="/Admin">Cancel</md-button>
+        <md-button class="md-raised md-primary" ng-disabled="eventForm.$invalid" ng-click="createEvent()">Submit</md-button>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/event.service.js"></script>
+    <script src="~/js/map.service.js"></script>
+    <script src="~/js/admin/create.controller.js"></script>
+    <script type="text/javascript">
+        function initialize() {
+            angular.element($('#small_map')).scope().initMap();
+        }
+    </script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

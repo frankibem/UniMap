@@ -1,4 +1,7 @@
-﻿.dialog {
+﻿.create_input {
+    width: 100%;        
+}
+.dialog {
     width: 300px;
     height: 300px;
 }
