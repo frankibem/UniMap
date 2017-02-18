@@ -1,7 +1,7 @@
 ﻿/// <reference path="../lib/angular/angular.js" />
 
 angular.module('appModule')
-    .controller('indexController', ['$scope', 'eventService',
+    .controller('indexCtrl', ['$scope', 'eventService',
         function ($scope, eventService) {
             $scope.filterText = "";
 

@@ -1,7 +1,7 @@
 ﻿/// <reference path="../lib/angular/angular.js" />
 
 angular.module('appModule')
-    .controller('indexController', ['$scope', '$mdSidenav', 'mapService',
+    .controller('indexCtrl', ['$scope', '$mdSidenav', 'mapService',
         function ($scope, $mdSidenav, mapService) {
             $scope.initMap = () => {
                 $scope.$apply(() => {
