@@ -17,18 +17,26 @@
 </head>
 
 <body ng-controller="indexCtrl">
-    <md-sidenav class="md-sidenav-left"
+    <md-sidenav class="md-sidenav-left sidenav-padding"
                 md-component-id="left"
                 md-whiteframe="4"
-                md-is-open="false">
+                md-is-open="true">
+
+      <h4>Start Date</h4>
+      <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+
+      <h4>End Date</h4>
+      <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+
+      
 
     </md-sidenav>
 
     <div id="map"></div>
 
     <div class="map-menu-button">
-      <md-button class="md-fab" aria-label="Eat cake">
-          <md-icon md-svg-src="img/icons/cake.svg"></md-icon>
+      <md-button class="md-fab" aria-label="Eat cake" ng-click="openLeftMenu()">
+          <i class="material-icons home-map-icon">place</i>
       </md-button>
     </div>
 
