@@ -1,0 +1,59 @@
+.map-menu-button {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.home-map-icon {
+    font-size: 35px;
+    line-height: inherit;
+}
+
+.nav-map-icon {
+    padding: 15px 15px 15px 0;
+    font-size: 35px;
+    line-height: inherit;
+}
+
+    .nav-map-icon p {
+        overflow: hidden;
+    }
+
+.md-list-item-inner {
+    max-height: 100px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.md-list-item-text {
+    padding: 15px 0;
+}
+
+.sidenav-padding {
+    padding: 10px;
+}
+
+.loginCard {
+    padding: 10px;
+}
+
+#dialog {
+    box-shadow: none;
+    width: 200px;
+}
+
+@media(min-with: 400px) {
+    #dialog {
+        width: 300px;
+    }
+}
+
+#dialog md-card-title {
+    flex: none;
+}
+
+#dialog md-card-content {
+    flex: 1;
+}
