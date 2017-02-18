@@ -77,15 +77,12 @@ namespace UniMap.Data_Access
 
             if (dbEvent == null) return false;
 
+            // Map the updated information over.
             dbEvent.Address = @event.Address;
-            dbEvent.City = @event.City;
-            dbEvent.Country = @event.Country;
             dbEvent.EndOn = @event.EndOn;
             dbEvent.Latitude = @event.Latitude;
             dbEvent.Longitude = @event.Longitude;
-            dbEvent.PostalCode = @event.PostalCode;
             dbEvent.StartOn = @event.StartOn;
-            dbEvent.State = @event.State;
             dbEvent.Tags = @event.Tags;
             dbEvent.Title = @event.Title;
 

@@ -25,5 +25,6 @@ namespace UniMap.Data
 
         public DbSet<Event> Events { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<EventTag> EventTags { get; set; }
     }
 }
