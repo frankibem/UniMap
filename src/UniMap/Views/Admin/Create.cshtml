@@ -1,78 +1,80 @@
 @model UniMap.Models.Event
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Event";
 }
 
-<h2>Create</h2>
+@section styles {
+    <link href="~/css/map.css" rel="stylesheet" />
+}
 
-<form asp-action="Create">
-    <div class="form-horizontal">
-        <h4>Event</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Title" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Description" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="StartOn" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="StartOn" class="form-control" />
-                <span asp-validation-for="StartOn" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="EndOn" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="EndOn" class="form-control" />
-                <span asp-validation-for="EndOn" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Latitude" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Latitude" class="form-control" />
-                <span asp-validation-for="Latitude" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Longitude" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Longitude" class="form-control" />
-                <span asp-validation-for="Longitude" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Address" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @Html.ActionLink("Cancel", "Index", "Admin")
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+<form asp-action="Create" flex="100" flex-gt-xs="60" flex-offset-gt-xs="20" flex-gt-sm="50" flex-offset-gt-sm="25">
+    <h2>Create Event</h2>
+
+    <md-input-container>
+        <label>Email</label>
+        <input asp-for="Title" type="text" class="create_input">
+        <span asp-validation-for="Title" class="text-danger" />
+    </md-input-container>
+    <br />
+    <md-input-container>
+        <label>Description</label>
+        <input asp-for="Title" type="text">
+        <span asp-validation-for="Title" class="text-danger" />
+    </md-input-container>
+    <br />
+    <md-input-container>
+        <label>Start Date</label>
+        @*<md-datepicker md-placeholder="Start date"></md-datepicker>*@
+    </md-input-container>
+    <md-input-container>
+        <label>Start Time</label>
+        @*<md-select ng-model="user.hours">
+                <md-option ng-repeat="hour in hours" value="{{hour}}">
+                    {{hour}}
+                </md-option>
+            </md-select> :
+            <md-select ng-model="user.minutes">
+                <md-option ng-repeat="minute in minutes" value="{{minute}}">
+                    {{minute}}
+                </md-option>
+            </md-select>*@
+    </md-input-container>
+    <br />
+    <md-input-container>
+        <label>End Date</label>
+        @*<md-datepicker md-placeholder="End date"></md-datepicker>*@
+    </md-input-container>
+    <md-input-container>
+        <label>End Time</label>
+        <input asp-for="Title" type="text">
+        @*<md-select ng-model="user.hours">
+                <md-option ng-repeat="hour in hours" value="{{hour}}">
+                    {{hour}}
+                </md-option>
+            </md-select> :
+            <md-select ng-model="user.minutes">
+                <md-option ng-repeat="minute in minutes" value="{{minute}}">
+                    {{minute}}
+                </md-option>
+            </md-select>*@
+    </md-input-container>
+    <br />
+    <md-input-container>
+        <label>Address</label>
+        <input asp-for="Title" type="text">
+        <span asp-validation-for="Title" class="text-danger" />
+    </md-input-container>
+    <hr />
+    <div id="map"></div>
+    <br />
+
+    <md-button href="/Admin">Cancel</md-button>
+    <md-button type="submit" value="Save" class="md-raised md-primary">Submit</md-button>
+
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
+    <script src="~/js/map.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
