@@ -12,9 +12,30 @@
   line-height: inherit;
 }
 
+.nav-map-icon {
+  padding: 15px 15px 15px 0;
+  font-size: 35px;
+  line-height: inherit;
+
+  p {
+    overflow: hidden;
+  }
+}
+
+.md-list-item-inner {
+  max-height: 100px;
+}
+
+.md-list-item-text {
+  padding: 15px 0;
+
+}
+
 .sidenav-padding {
   padding: 10px;
 }
+
+
 /* End Home Page CSS */
 
 /* Login Page CSS */

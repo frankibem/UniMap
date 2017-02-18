@@ -21,14 +21,34 @@
                 md-component-id="left"
                 md-whiteframe="4"
                 md-is-open="true">
-
-      <h4>Start Date</h4>
+      <br /><br />
       <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
-
-      <h4>End Date</h4>
-      <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
-
-      
+      <br /><br />
+      <md-subheader class="md-no-sticky">3 line item (with hover)</md-subheader>
+        <md-list-item class="md-3-line nav-event" ng-click="null">
+          <i class="material-icons nav-map-icon">place</i>
+          <div class="md-list-item-text" layout="column">
+            <h3>Event Title</h3>
+            <h4>02/17/17</h4>
+            <p>This event is really cool, you should come!This event is really cool, you should come!This event is really cool, you should come!</p>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-3-line nav-event" ng-click="null">
+          <i class="material-icons nav-map-icon">place</i>
+          <div class="md-list-item-text" layout="column">
+            <h3>Event Title</h3>
+            <h4>02/17/17</h4>
+            <p>This event is really cool, you should come!</p>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-3-line nav-event" ng-click="null">
+          <i class="material-icons nav-map-icon">place</i>
+          <div class="md-list-item-text" layout="column">
+            <h3>Event Title</h3>
+            <h4>02/17/17</h4>
+            <p>This event is really cool, you should come!</p>
+          </div>
+        </md-list-item>
 
     </md-sidenav>
 
