@@ -17,6 +17,44 @@ namespace UniMap.DataAccess
         }
 
         /// <summary>
+        /// Given an event ID, return an event (or null if no events were found).
+        /// </summary>
+        public Event GetEvent(int eventID)
+        {
+            var @event = _db.Events.FirstOrDefault(e => e.ID == eventID);
+            @event.Tags = GetTagsByEventID(eventID).ToList();
+
+            return @event;
+        }
+
+        /// <summary>
+        /// Given several event IDs, return the corresponding events (or empty).
+        /// </summary>
+        public IEnumerable<Event> GetEvents()
+        {
+            var events = _db.Events;
+            foreach (var @event in events)
+            {
+                @event.Tags = GetTagsByEventID(@event.ID).ToList();
+            }
+
+            return events.OrderBy(e => e.StartOn).OrderBy(e => e.EndOn);
+        }
+
+        /// <summary>
+        /// Get all the events with the associated tag (or empty).
+        /// </summary>
+        public IEnumerable<Event> GetEventsByTags(IEnumerable<Tag> tags)
+        {
+            var tagsHash = new HashSet<int>(tags.Select(t => t.ID));
+
+            return (from e in _db.Events
+                    where e.Tags.Any(t => tagsHash.Contains(t.ID))
+                    select e).Include(e => e.Tags)
+                    .OrderBy(e => e.StartOn).OrderBy(e => e.EndOn);
+        }
+
+        /// <summary>
         /// Save the given event in the store. Return -1 if unable to save.
         /// </summary>
         public int CreateEvent(Event @event)
@@ -34,26 +72,6 @@ namespace UniMap.DataAccess
             }
 
             return savedEvent.ID;
-        }
-
-        /// <summary>
-        /// Save the given tag in the store. Return -1 if unable to save.
-        /// </summary>
-        public int CreateTag(Tag tag)
-        {
-            Tag savedTag = null;
-
-            try
-            {
-                savedTag = _db.Tags.Add(tag).Entity;
-                _db.SaveChanges();
-            }
-            catch(Exception)
-            {
-                return -1;
-            }
-
-            return savedTag.ID;
         }
 
         /// <summary>
@@ -92,48 +110,31 @@ namespace UniMap.DataAccess
         }
 
         /// <summary>
-        /// Given an event ID, return an event (or null if no events were found).
-        /// </summary>
-        public Event GetEvent(int eventID)
-        {
-            var @event = _db.Events.FirstOrDefault(e => e.ID == eventID);
-            @event.Tags = GetTagsByEventID(eventID).ToList();
-
-            return @event;
-        }
-
-        /// <summary>
-        /// Given several event IDs, return the corresponding events (or empty).
-        /// </summary>
-        public IEnumerable<Event> GetEvents()
-        {
-            var events = _db.Events;
-            foreach(var @event in events)
-            {
-                @event.Tags = GetTagsByEventID(@event.ID).ToList();
-            }
-
-            return events;
-        }
-
-        /// <summary>
-        /// Get all the events with the associated tag (or empty).
-        /// </summary>
-        public IEnumerable<Event> GetEventsByTags(IEnumerable<Tag> tags)
-        {
-            var tagsHash = new HashSet<int>(tags.Select(t => t.ID));
-
-            return (from e in _db.Events
-                    where e.Tags.Any(t => tagsHash.Contains(t.ID))
-                    select e).Include(e => e.Tags);
-        }
-
-        /// <summary>
         /// Given an ID, return a tag or null.
         /// </summary>
         public Tag GetTag(int tagID)
         {
             return _db.Tags.FirstOrDefault(t => t.ID == tagID);
+        }
+
+        /// <summary>
+        /// Save the given tag in the store. Return -1 if unable to save.
+        /// </summary>
+        public int CreateTag(Tag tag)
+        {
+            Tag savedTag = null;
+
+            try
+            {
+                savedTag = _db.Tags.Add(tag).Entity;
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+
+            return savedTag.ID;
         }
 
         /// <summary>
