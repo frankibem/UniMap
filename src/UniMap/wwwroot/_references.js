@@ -1,4 +1,6 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="js/admin/create.controller.js" />
+/// <reference path="js/admin/edit.controller.js" />
 /// <reference path="js/admin/index.controller.js" />
 /// <reference path="js/app.js" />
 /// <reference path="js/event.service.js" />
