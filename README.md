@@ -1,6 +1,6 @@
 # UniMap
 
-This project is for the [Texas Tech University Appathon](//ttuappathon.com/). The theme for the 2017 appathon is "Map It!". This project attempted to create a web application that graphically displays events occuring on campus during a certain timeframe on a map in under 24 hours.
+This project is for the [Texas Tech University Appathon](http://ttuappathon.com/). The theme for the 2017 appathon is "Map It!". This project attempted to create a web application that graphically displays events occuring on campus during a certain timeframe on a map in under 24 hours.
 
 ## After 24 Hours :coffee:
 
@@ -16,7 +16,7 @@ An admin can log into the backend and create/edit events (edit still in progress
 
 ![](./images/admin_new_event.jpg)
 
-At the end of the competition, each team demoed their work. [UniMap won 2nd place](//ttuappathon.com/2017/02/23/winners-have-no-name/).
+At the end of the competition, each team demoed their work. [UniMap won 2nd place](http://ttuappathon.com/2017/02/23/winners-have-no-name/).
 
 ## Future Development
 
