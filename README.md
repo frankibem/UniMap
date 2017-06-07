@@ -22,7 +22,7 @@ At the end of the competition, each team demoed their work. [UniMap won 2nd plac
 
 Potential ideas for future development:
 
-- :calendar: Pull events from Google Calendar API and Office 265 API
+- :calendar: Pull events from Google Calendar API and Office 365 API
 - :point_down: Reverse geocoding
 - Finish admin pages
 
